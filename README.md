@@ -1,4 +1,4 @@
-# map-gen
+# mpa-gen
 
 [![PyPI version](https://badge.fury.io/py/mpa-gen.svg)](https://badge.fury.io/py/mpa-gen)
 [![GitHub license](https://img.shields.io/github/license/reddec/mpa-gen)](https://github.com/reddec/mpa-gen/blob/master/LICENSE)
