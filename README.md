@@ -24,6 +24,16 @@ Requirements:
 
 `pip install mpa-gen`
 
+## Quick start from scratch
+
+1. Create empty directory and go into it
+2. Install latest mpa-gen `pip3 install --upgrade --user mpa-gen`
+3. Initialize go project `go mod init myproject`
+4. Generate site structure `mpa-gen portal main`
+
+![Peek 2019-10-02 13-16](https://user-images.githubusercontent.com/6597086/66019781-453aca00-e517-11e9-80ee-016d4285af56.gif)
+
+
 ## Usage
 
 ```
