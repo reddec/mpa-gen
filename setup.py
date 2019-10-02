@@ -11,7 +11,7 @@ with open('requirements.txt', 'r') as f:
     ]
 setuptools.setup(
     name='mpa-gen',
-    version='0.1',
+    version='0.2',
     author='Baryshnikov Aleksandr (reddec)',
     author_email='owner@reddec.net',
     description='Simple generator for Go multi-page site',
