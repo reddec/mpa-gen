@@ -1,0 +1,61 @@
+package {{package}}
+
+import (
+  "github.com/gin-gonic/gin"
+  "log"
+  "bytes"
+  "net/http"
+)
+
+const (
+    page{{ page_name }} = "{{ name }}"
+    {{func_name}}View = "{{view_name}}"
+    {{func_name}}Layout = "{{layout_name}}"
+)
+
+func (ct *Controller) {{func_name}}(request {{in_params}}, gctx *gin.Context) (*{{out_params}}, error) {
+  //TODO: do logic for {{name}}
+  return &{{out_params}}{}, nil
+}
+
+type {{in_params}} struct {
+  //TODO: request params
+}
+
+type {{out_params}} struct {
+  //TODO: view params
+}
+
+
+func (ct *Controller) {{ handler_name }}(gctx *gin.Context) {
+    var req {{in_params}}
+    if err:=gctx.Bind(&req); err != nil {
+      log.Println("[ERROR]", "{{func_name}}","{{section}}","{{name}}", "parse request:",err)
+      gctx.AbortWithError(http.StatusBadRequest, err)
+      return
+    }
+    ans, err := ct.{{func_name}}(req, gctx)
+    if err != nil {
+      log.Println("[ERROR]", "{{func_name}}","{{section}}","{{name}}", "do request:",err)
+      gctx.AbortWithError(http.StatusInternalServerError, err)
+      return
+    }
+    if ans == nil {
+      return // return handled by method
+    }
+    buf := &bytes.Buffer{}
+    err = ct.Templates.Get({{func_name}}Layout, {{func_name}}View).Execute(buf, gin.H{
+        "Root" : Root,
+        "Section": Section,
+        "Page" : page{{ page_name }},
+        "Context" : gctx,
+        "Data":    ans,
+        "Request": req,
+    })
+    if err != nil {
+        log.Println("[ERROR]", "{{func_name}}","{{section}}","{{name}}", err)
+        gctx.AbortWithError(http.StatusInternalServerError, err)
+        return
+    }
+    gctx.Data(http.StatusOK, "text/html", buf.Bytes())
+}
